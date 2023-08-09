@@ -1,0 +1,28 @@
+﻿<Window x:Class="TestKotClient.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestKotClient"
+        mc:Ignorable="d"
+        Title="TestWindow" Height="450" Width="800" Background="LightGray">
+    <Grid>
+        <TextBlock x:Name="questionBlock" FontSize="16" FontWeight="Bold" Margin="30,30,0,0"></TextBlock>
+
+        <ListBox x:Name="answerListR" Background="DarkGray" Margin="0,60,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"  Visibility="Hidden">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Name="answerRButton" FontSize="14" Content="{Binding Path=answerText}"  GroupName = "AnswerGroup" Margin="30,10,0,0" Checked="answer_CheckR" Unchecked="answer_UnCheckR"></RadioButton>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="answerListCh" Background="DarkGray" Margin="0,60,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Name="answerChBox" FontSize="14" Content="{Binding Path=answerText}" Margin="30,10,0,0"  Checked="answer_CheckChBox" Unchecked="answer_UnCheckChBox"></CheckBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="answerButton" Width="150" Height="50" Margin="0,300,0,0" Click="nextQuestion_Click"></Button>
+    </Grid>
+</Window>
