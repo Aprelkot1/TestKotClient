@@ -27,12 +27,13 @@ namespace TestKotClient
         }
         public async void DataStream(string message)
         {
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(serverIP.Text), 8888);
+            try
+            {
+                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(serverIP.Text), 8888);
             using Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             await socket.ConnectAsync(serverIP.Text, 8888);
             using var stream = new NetworkStream(socket);
-            try
-            {
+           
                 // кодируем его в массив байт
                 var data = Encoding.UTF8.GetBytes(message);
                 // отправляем массив байт на сервер 
@@ -40,7 +41,7 @@ namespace TestKotClient
                 while (true)
                 {
                     // буфер для получения данных
-                    var responseData = new byte[1024];
+                    var responseData = new byte[3096];
                     // получаем данные
                     var bytes = await stream.ReadAsync(responseData, 0, responseData.Count());
                     // преобразуем полученные данные в строку
