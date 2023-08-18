@@ -42,10 +42,12 @@ namespace TestKotClient
             Button tag = sender as Button;
             DataStream(tag.Tag.ToString() + "[q]");
         }
-        public void answerChekedR_Click(Object sender, EventArgs e)
+        public void answerChekedR_Click(string answer)
         {
-            System.Windows.Controls.RadioButton tag = sender as System.Windows.Controls.RadioButton;
-            studentAnswers.Add(tag.Content.ToString()); 
+            //System.Windows.Controls.RadioButton tag = sender as System.Windows.Controls.RadioButton;
+            studentAnswers.Add(answer);
+          
+
         }
         public void answerUnChekedR_Click(Object sender, EventArgs e)
         {
@@ -62,17 +64,28 @@ namespace TestKotClient
             System.Windows.Controls.CheckBox tag = sender as System.Windows.Controls.CheckBox;
             studentAnswers.Remove(tag.Content.ToString());
         }
+        public void answerP_isChanged(string answerP)//добавляет ответы в список ответов для отправки
+        {
+            if (answerP.Trim() != "")
+            {
+                studentAnswers.Clear();
+                studentAnswers.Add(answerP);
+            }
+
+           
+        }
         public void nextQuestion_Click(Object sender, EventArgs e)
         {
-          
+            
             if (studentAnswers.Count > 0)
             {
-               
                 Button tag = sender as Button;
+
                 if (rightAnswers.Count == studentAnswers.Count)//если количество ответов студента больше чем количество правильных нет смысла проверять
                 {
                     foreach (var sa in studentAnswers)//если ответы студента содержат правильные удаляем их в итоге правильных ответов в списке не должно остаться
                     {
+
                         if (studentAnswers.Contains(sa))
                         {
                             rightAnswers.Remove(sa);
@@ -82,6 +95,7 @@ namespace TestKotClient
                 if (rightAnswers.Count == 0) //если ничего не осталось, то значит все правильно и добавляем правильный ответ в копилку
                 {
                     studentResult += 1;
+                   
                 }
                 rightAnswers.Clear();
                 if (numberOfQuestion == questionList.Count - 1)
@@ -91,11 +105,13 @@ namespace TestKotClient
                     DataStream(userName.Text + "|" + testWindow.Title + "|" + (studentResult / float.Parse(a) * 100).ToString() + "[end]");
                     testWindow.Close();
                     studentResult = 0;
+
                 }
                 else
                 {
                     numberOfQuestion += 1;
                     DataStream(questionList[1] + "|" + questionList[numberOfQuestion] + "[qt]");
+                   
                 }
             }
             else
@@ -103,8 +119,6 @@ namespace TestKotClient
                 MessageBox.Show("Выберите хотя бы один ответ!");
             }
             studentAnswers.Clear();
-           
-                
         }
     }
 }

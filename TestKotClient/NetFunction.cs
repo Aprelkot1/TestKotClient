@@ -114,13 +114,22 @@ namespace TestKotClient
                         {
                             testWindow.answerListCh.Visibility = Visibility.Visible;
                             testWindow.answerListR.Visibility = Visibility.Hidden;
+                            testWindow.answerListP.Visibility = Visibility.Hidden;
                             testWindow.answerListCh.ItemsSource = answerList;
                         }
                         if (questionType.Contains("Один вариант"))
                         {
                             testWindow.answerListCh.Visibility = Visibility.Hidden; 
                             testWindow.answerListR.Visibility = Visibility.Visible;
+                            testWindow.answerListP.Visibility = Visibility.Hidden;
                             testWindow.answerListR.ItemsSource = answerList;
+                        }
+                        if (questionType.Contains("Последовательность"))
+                        {
+                            testWindow.answerListCh.Visibility = Visibility.Hidden;
+                            testWindow.answerListR.Visibility = Visibility.Hidden;
+                            testWindow.answerListP.Visibility = Visibility.Visible;
+                            testWindow.answerListP.ItemsSource = answerList;
                         }
                         testWindow.Show();
                         

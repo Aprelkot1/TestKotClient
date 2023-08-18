@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:local="clr-namespace:TestKotClient"
         mc:Ignorable="d"
         Title="TestWindow" Height="450" Width="800" Background="LightGray">
@@ -16,10 +17,17 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="answerListCh" Background="DarkGray" Margin="0,60,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+        <ListBox x:Name="answerListCh" Background="DarkGray" Margin="0,60,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Visibility="Hidden">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Name="answerChBox" FontSize="14" Content="{Binding Path=answerText}" Margin="30,10,0,0"  Checked="answer_CheckChBox" Unchecked="answer_UnCheckChBox"></CheckBox>
+                    <CheckBox Name="answerChBox" FontSize="14" Content="{Binding Path=answerText}" Margin="30,10,0,0"  Checked="answer_CheckChBox" Unchecked="answer_UnCheckChBox" ></CheckBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="answerListP" Background="DarkGray" Margin="0,60,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.SelectDroppedItems="True" SelectionChanged="answerP_isChanged" Visibility="Hidden">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Name="answerBlock" FontSize="14" Text="{Binding Path=answerText}" Margin="30,10,0,0" ></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
